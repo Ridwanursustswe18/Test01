@@ -15,8 +15,8 @@ navToggle.addEventListener('click',function(){
 
     
     linksContainer.classList.toggle('show-links');
-   /*///for fixing the links height dynamically
-    const containerHeight = linksContainer.getBoundingClientRect();
+   //for fixing the links height dynamically
+    /*const containerHeight = linksContainer.getBoundingClientRect();
     //console.log(containerHeight);
     const linksHeight =  links.getBoundingClientRect().height;
     //console.log(linksHeight);
@@ -62,9 +62,20 @@ scrollLinks.forEach(function(link){
     const id = e.currentTarget.getAttribute("href").slice(1);
     const element = document.getElementById(id);
    //calculate the heights
-   const navHeight =  navbar.getElementsByClassName().height;
-   let position = element.offsetTop;
-    
+   const navHeight =  navbar.getBoundingClientRect().height;
+   
+   const containerHeight = linksContainer.getBoundingClientRect().height;
+   const fixedNav = navbar.classList.contains("fixed-nav");
+   // subtacting the navbar's height for viewing previous link
+   let position = element.offsetTop - navHeight;
+   //for fixing when navbar goes from static to dynamic 
+   if(!fixedNav){
+        position -= navHeight;
+    }
+   // for fixing the small screen's containerheight problem
+    if(navHeight > 82){
+        position += containerHeight;
+    }
     window.scrollTo({
         left:0,
         top:position,
