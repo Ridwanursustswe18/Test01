@@ -62,7 +62,9 @@ scrollLinks.forEach(function(link){
     const id = e.currentTarget.getAttribute("href").slice(1);
     const element = document.getElementById(id);
    //calculate the heights
-    let position = element.offsetTop;
+   const navHeight =  navbar.getElementsByClassName().height;
+   let position = element.offsetTop;
+    
     window.scrollTo({
         left:0,
         top:position,
