@@ -14,20 +14,20 @@ const links = document.querySelector(".links");
 navToggle.addEventListener('click',function(){
 
     
-    //linksContainer.classList.toggle('show-links');
-   ///for fixing the links height dynamically
+    linksContainer.classList.toggle('show-links');
+   /*///for fixing the links height dynamically
     const containerHeight = linksContainer.getBoundingClientRect();
     //console.log(containerHeight);
     const linksHeight =  links.getBoundingClientRect().height;
     //console.log(linksHeight);
-    if(containerHeight == 0){
+    if(containerHeight === 0){
         linksContainer.style.height = `${linksHeight}px`;
 
     }
     else{
         linksContainer.style.height = 0;
 
-    }
+    }*/
 });
 const navbar = document.getElementById("nav");
 const topLink = document.querySelector(".top-link");
@@ -43,7 +43,7 @@ window.addEventListener('scroll',function(){
         navbar.classList.remove('fixed-nav');
     }
 
-    if(scrollHeight > 400){
+    if(scrollHeight > 600){
         topLink.classList.add("show-link");
 
     }
@@ -53,4 +53,22 @@ window.addEventListener('scroll',function(){
 });
 
 // ********** smooth scroll ************
+const scrollLinks = document.querySelectorAll(".scroll-link");
+scrollLinks.forEach(function(link){
+    link.addEventListener("click",function(e){
+    //preventing default smooth behaviour
+    e.preventDefault(); 
+    //navigate to specific section of links dynamically
+    const id = e.currentTarget.getAttribute("href").slice(1);
+    const element = document.getElementById(id);
+   //calculate the heights
+    let position = element.offsetTop;
+    window.scrollTo({
+        left:0,
+        top:position,
+        
+    });
+    linksContainer.style.height = 0;
+    });
+});
 // select links
